@@ -1,0 +1,41 @@
+[package]
+name = "spike-c-capture"
+version = "0.1.0"
+edition = "2021"
+# Throwaway spike — do not merge into main app.
+# Purpose: validate that SCStream (macOS) and Windows Graphics Capture API
+# deliver frames reliably at 10 FPS before building the production capture layer.
+
+[[bin]]
+name = "spike-c"
+path = "src/main.rs"
+
+[dependencies]
+image = { version = "0.25", default-features = false, features = ["png"] }
+log = "0.4"
+env_logger = "0.11"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+# v0.3.6 confirmed: exposes SCStream for continuous capture.
+# Module paths: screencapturekit::{shareable_content, stream::{SCStream,
+#   content_filter, configuration, output_trait, output_type}}
+screencapturekit = "0.3"
+# Required directly for CMTime and CMSampleBuffer (transitive via screencapturekit
+# but must be declared explicitly to use in our code).
+core-media-rs = "0.3"
+core-video-rs = "0.3"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_Graphics_Direct3D",
+    "Win32_Graphics_Direct3D11",
+    "Win32_Graphics_Dxgi",
+    "Win32_Graphics_Dxgi_Common",
+    "Graphics_Capture",
+    "Graphics_DirectX",
+    "Graphics_DirectX_Direct3D11",
+    "Win32_System_WinRT",
+    "Win32_System_WinRT_Graphics_Capture",
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+] }

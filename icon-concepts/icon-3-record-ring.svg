@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0533"/>
+      <stop offset="100%" style="stop-color:#0d001a"/>
+    </linearGradient>
+    <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff416c"/>
+      <stop offset="50%" style="stop-color:#ff4b2b"/>
+      <stop offset="100%" style="stop-color:#ff6b35"/>
+    </linearGradient>
+    <linearGradient id="inner-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2d1b69"/>
+      <stop offset="100%" style="stop-color:#11998e"/>
+    </linearGradient>
+    <filter id="glow3" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="inner-glow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- App background -->
+  <rect width="1024" height="1024" rx="220" fill="url(#bg3)"/>
+
+  <!-- Outer glow ring (decorative) -->
+  <circle cx="512" cy="490" r="310" fill="none" stroke="#ff416c" stroke-width="3" opacity="0.15"/>
+  <circle cx="512" cy="490" r="270" fill="none" stroke="#ff416c" stroke-width="3" opacity="0.2"/>
+
+  <!-- Main ring -->
+  <circle cx="512" cy="490" r="240" fill="none" stroke="url(#ring-grad)" stroke-width="48"
+          stroke-linecap="round" filter="url(#glow3)"/>
+
+  <!-- Arc gap at bottom-right (like a progress ring almost complete) -->
+  <circle cx="512" cy="490" r="240" fill="none" stroke="url(#bg3)" stroke-width="52"
+          stroke-dasharray="80 9999" stroke-dashoffset="-680"/>
+
+  <!-- Inner fill circle -->
+  <circle cx="512" cy="490" r="178" fill="url(#inner-grad)"/>
+
+  <!-- Pixel/dot grid inside — suggests GIF pixels -->
+  <g opacity="0.6" filter="url(#inner-glow)">
+    <!-- Row 1 -->
+    <rect x="390" y="400" width="30" height="30" rx="6" fill="#38ef7d"/>
+    <rect x="432" y="400" width="30" height="30" rx="6" fill="#11998e"/>
+    <rect x="474" y="400" width="30" height="30" rx="6" fill="#38ef7d"/>
+    <rect x="516" y="400" width="30" height="30" rx="6" fill="#11998e"/>
+    <rect x="558" y="400" width="30" height="30" rx="6" fill="#38ef7d"/>
+    <rect x="600" y="400" width="30" height="30" rx="6" fill="#11998e"/>
+    <!-- Row 2 -->
+    <rect x="390" y="442" width="30" height="30" rx="6" fill="#11998e"/>
+    <rect x="432" y="442" width="30" height="30" rx="6" fill="#ff6b35"/>
+    <rect x="474" y="442" width="30" height="30" rx="6" fill="#ff416c"/>
+    <rect x="516" y="442" width="30" height="30" rx="6" fill="#ff6b35"/>
+    <rect x="558" y="442" width="30" height="30" rx="6" fill="#ff416c"/>
+    <rect x="600" y="442" width="30" height="30" rx="6" fill="#38ef7d"/>
+    <!-- Row 3 -->
+    <rect x="390" y="484" width="30" height="30" rx="6" fill="#38ef7d"/>
+    <rect x="432" y="484" width="30" height="30" rx="6" fill="#ff416c"/>
+    <rect x="474" y="484" width="30" height="30" rx="6" fill="#11998e"/>
+    <rect x="516" y="484" width="30" height="30" rx="6" fill="#38ef7d"/>
+    <rect x="558" y="484" width="30" height="30" rx="6" fill="#11998e"/>
+    <rect x="600" y="484" width="30" height="30" rx="6" fill="#ff416c"/>
+    <!-- Row 4 -->
+    <rect x="390" y="526" width="30" height="30" rx="6" fill="#11998e"/>
+    <rect x="432" y="526" width="30" height="30" rx="6" fill="#38ef7d"/>
+    <rect x="474" y="526" width="30" height="30" rx="6" fill="#ff6b35"/>
+    <rect x="516" y="526" width="30" height="30" rx="6" fill="#11998e"/>
+    <rect x="558" y="526" width="30" height="30" rx="6" fill="#38ef7d"/>
+    <rect x="600" y="526" width="30" height="30" rx="6" fill="#ff6b35"/>
+  </g>
+
+  <!-- Record dot top right of ring -->
+  <circle cx="700" cy="275" r="46" fill="#ff416c" filter="url(#glow3)"/>
+  <circle cx="700" cy="275" r="30" fill="white"/>
+
+  <!-- Bottom label -->
+  <text x="512" y="798" font-family="-apple-system, 'SF Pro Display', Arial Black, sans-serif"
+        font-size="72" font-weight="900" fill="white" text-anchor="middle" letter-spacing="-1"
+        filter="url(#inner-glow)">GIF</text>
+</svg>

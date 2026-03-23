@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "src-tauri",
+    "spikes/spike-c-capture",
+    "spikes/spike-a-selfexclusion",
+    "spikes/spike-b-encoding",
+]
+resolver = "2"

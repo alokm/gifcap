@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GifCap</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #capture-frame {
+      flex: 1;
+      position: relative;
+      border: 2px solid #00d4ff;
+      background: transparent;
+      min-height: 0;
+    }
+
+    #capture-frame.recording { border-color: #ff3b30; }
+    #capture-frame.paused    { border-color: #ff9500; }
+
+    #control-strip {
+      height: 34px;
+      flex-shrink: 0;
+      background: rgba(30, 30, 30, 0.92);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 8px 0 76px; /* 76px left: clear the three traffic-light buttons */
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    #control-strip.collapsed {
+      height: 4px;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    #dimensions {
+      color: #aaa;
+      min-width: 80px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .btn {
+      padding: 3px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      cursor: pointer;
+      font-size: 11px;
+      transition: background 0.15s;
+    }
+    .btn:hover    { background: rgba(255,255,255,0.2); }
+    .btn:disabled { opacity: 0.4; cursor: default; }
+
+    #btn-record { background: rgba(255, 59, 48, 0.8); border-color: #ff3b30; }
+    #btn-record:hover { background: rgba(255, 59, 48, 1); }
+
+    select {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      border-radius: 4px;
+      padding: 2px 4px;
+      font-size: 11px;
+    }
+
+    #timer {
+      margin-left: auto;
+      color: #aaa;
+      font-variant-numeric: tabular-nums;
+      min-width: 60px;
+      text-align: right;
+    }
+
+    .handle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #00d4ff;
+      border-radius: 50%;
+    }
+    .recording .handle { background: #ff3b30; }
+
+    .handle-nw { top: -5px; left: -5px; cursor: nw-resize; }
+    .handle-n  { top: -5px; left: 50%; transform: translateX(-50%); cursor: n-resize; }
+    .handle-ne { top: -5px; right: -5px; cursor: ne-resize; }
+    .handle-e  { top: 50%; right: -5px; transform: translateY(-50%); cursor: e-resize; }
+    .handle-se { bottom: -5px; right: -5px; cursor: se-resize; }
+    .handle-s  { bottom: -5px; left: 50%; transform: translateX(-50%); cursor: s-resize; }
+    .handle-sw { bottom: -5px; left: -5px; cursor: sw-resize; }
+    .handle-w  { top: 50%; left: -5px; transform: translateY(-50%); cursor: w-resize; }
+  </style>
+</head>
+<body>
+  <div id="control-strip" data-tauri-drag-region>
+      <span id="dimensions">640 × 480</span>
+      <button class="btn" id="btn-record">Record</button>
+      <button class="btn" id="btn-pause" disabled>Pause</button>
+      <button class="btn" id="btn-stop" disabled>Stop</button>
+      <label style="color:#aaa;font-size:11px;">FPS
+        <select id="fps-select">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
+      </label>
+      <span id="frame-counter" style="color:#aaa;font-size:11px;">0 frames</span>
+      <span id="timer">0:00</span>
+      <button class="btn" id="btn-collapse" title="Hide controls">▲</button>
+  </div>
+
+  <div id="capture-frame">
+    <div class="handle handle-nw" data-dir="nw"></div>
+    <div class="handle handle-n"  data-dir="n"></div>
+    <div class="handle handle-ne" data-dir="ne"></div>
+    <div class="handle handle-e"  data-dir="e"></div>
+    <div class="handle handle-se" data-dir="se"></div>
+    <div class="handle handle-s"  data-dir="s"></div>
+    <div class="handle handle-sw" data-dir="sw"></div>
+    <div class="handle handle-w"  data-dir="w"></div>
+  </div>
+
+  <script type="module" src="./capture.ts"></script>
+</body>
+</html>

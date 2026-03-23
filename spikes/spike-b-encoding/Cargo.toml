@@ -1,0 +1,17 @@
+[package]
+name = "spike-b-encoding"
+version = "0.1.0"
+edition = "2021"
+# Throwaway spike — do not merge into main app.
+# Purpose: validate that the three encoding pipelines (Fast/Balanced/HQ)
+# produce acceptable GIF quality and run within time budgets.
+
+[[bin]]
+name = "spike-b"
+path = "src/main.rs"
+
+[dependencies]
+gif = "0.13"
+color_quant = "1.1"
+quantette = "0.3"
+image = { version = "0.25", default-features = false, features = ["png"] }

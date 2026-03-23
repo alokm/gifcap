@@ -1,0 +1,7 @@
+node_modules/
+target/
+dist/
+src-tauri/target/
+*.local
+.DS_Store
+Thumbs.db

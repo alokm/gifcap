@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GifCap — Preferences</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 24px;
+      min-width: 360px;
+    }
+    h1 { font-size: 16px; font-weight: 600; margin-bottom: 20px; }
+    .pref-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #2a2a2a;
+      font-size: 13px;
+    }
+    .pref-label { color: #ccc; }
+    select, input {
+      background: #2a2a2a;
+      border: 1px solid #3a3a3a;
+      color: #fff;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+    .btn-save {
+      margin-top: 20px;
+      padding: 8px 24px;
+      background: #00d4ff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Preferences</h1>
+
+  <div class="pref-row">
+    <span class="pref-label">Default FPS</span>
+    <select id="pref-fps">
+      <option value="5">5</option>
+      <option value="10" selected>10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+    </select>
+  </div>
+
+  <div class="pref-row">
+    <span class="pref-label">Auto-collapse controls during recording</span>
+    <input id="pref-auto-collapse" type="checkbox" />
+  </div>
+
+  <div class="pref-row">
+    <span class="pref-label">Skip preview (save with last preset)</span>
+    <input id="pref-skip-preview" type="checkbox" />
+  </div>
+
+  <button class="btn-save" id="btn-save-prefs">Save</button>
+
+  <script type="module" src="./preferences.ts"></script>
+</body>
+</html>

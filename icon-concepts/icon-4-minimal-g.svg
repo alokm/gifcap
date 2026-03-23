@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="letter-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff" stop-opacity="1"/>
+      <stop offset="100%" style="stop-color:#e0d7ff" stop-opacity="1"/>
+    </linearGradient>
+    <filter id="shadow4">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#4a1e9e" flood-opacity="0.5"/>
+    </filter>
+    <filter id="inner4">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="card-clip">
+      <rect width="1024" height="1024" rx="220"/>
+    </clipPath>
+  </defs>
+
+  <!-- App background -->
+  <rect width="1024" height="1024" rx="220" fill="url(#bg4)"/>
+
+  <!-- Subtle grid overlay -->
+  <g clip-path="url(#card-clip)" opacity="0.07">
+    <line x1="0" y1="256" x2="1024" y2="256" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="512" x2="1024" y2="512" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="768" x2="1024" y2="768" stroke="white" stroke-width="1"/>
+    <line x1="256" y1="0" x2="256" y2="1024" stroke="white" stroke-width="1"/>
+    <line x1="512" y1="0" x2="512" y2="1024" stroke="white" stroke-width="1"/>
+    <line x1="768" y1="0" x2="768" y2="1024" stroke="white" stroke-width="1"/>
+  </g>
+
+  <!-- Large G letterform, custom drawn -->
+  <!-- Outer arc of G (right arc + bottom + left) -->
+  <path d="
+    M 512 148
+    C 720 148 860 288 860 480
+    C 860 672 720 812 512 812
+    C 304 812 164 672 164 480
+    C 164 288 304 148 512 148
+    Z"
+    fill="none" stroke="url(#letter-grad)" stroke-width="96"
+    stroke-linecap="round"
+    clip-path="url(#card-clip)"
+    filter="url(#shadow4)"/>
+
+  <!-- G crossbar (the horizontal stroke going right at midline) -->
+  <rect x="512" y="432" width="256" height="96" rx="48"
+        fill="url(#letter-grad)" filter="url(#shadow4)"/>
+
+  <!-- Mask out top-right of arc to form the G opening -->
+  <path d="M 512 148 L 860 148 L 860 432 L 764 432 L 764 244 L 512 244 Z"
+        fill="url(#bg4)"/>
+
+  <!-- Record dot in the opening of the G -->
+  <circle cx="742" cy="220" r="56" fill="#ff3b30" filter="url(#inner4)"/>
+  <circle cx="742" cy="220" r="36" fill="#ff3b30"/>
+  <circle cx="742" cy="220" r="22" fill="#ff6b6b"/>
+
+  <!-- "if" subtitle below, small -->
+  <text x="512" y="930" font-family="-apple-system, 'SF Pro Display', Arial, sans-serif"
+        font-size="44" font-weight="300" fill="rgba(255,255,255,0.7)"
+        text-anchor="middle" letter-spacing="14">C A P</text>
+</svg>

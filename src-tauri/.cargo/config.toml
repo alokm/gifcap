@@ -1,0 +1,8 @@
+# Sign the dev binary with a stable identifier before running it so that
+# macOS TCC recognises the permission under "io.gifcap" rather than a new
+# hash-based ad-hoc identity on every cargo rebuild.
+#
+# The runner receives:  <binary_path> [tauri-dev-args…]
+# $1 = binary path, ${@:2} = remaining args
+[target.aarch64-apple-darwin]
+runner = ["bash", "-c", "codesign --force --sign - --identifier io.gifcap \"$1\" 2>/dev/null; exec \"$1\" \"${@:2}\"", "x"]

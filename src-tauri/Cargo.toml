@@ -1,0 +1,56 @@
+[package]
+name = "gifcap"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.77"
+default-run = "gifcap"
+
+[lib]
+name = "gifcap_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[[bin]]
+name = "gifcap"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["macos-private-api"] }
+tauri-plugin-dialog = "2"
+tauri-plugin-store = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+rayon = "1"
+gif = "0.13"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
+color_quant = "1.1"
+quantette = "0.3"
+thiserror = "1"
+log = "0.4"
+env_logger = "0.11"
+base64 = "0.22"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+screencapturekit = "0.3"
+core-media-rs = "0.3"
+core-video-rs = "0.3"
+objc2 = "0.5"
+core-graphics = "0.24"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.58", features = [
+  "Win32_Graphics_Direct3D11",
+  "Win32_Graphics_Dxgi",
+  "Graphics_Capture",
+  "Win32_System_WinRT",
+  "Win32_Foundation",
+] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
