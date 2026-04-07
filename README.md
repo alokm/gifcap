@@ -25,10 +25,10 @@ A lightweight macOS screen recorder that captures any region of your screen and 
 1. Download `GifCap.app` from the [latest release](https://github.com/alokm/gifcap/releases)
 2. Move it to `/Applications` or anywhere on your Mac
 3. Sign it locally so macOS trusts it:
-   ```
-  xattr -cr /path/to/GifCap.app
-  codesign --force --deep --sign - --identifier "io.gifcap" /path/to/GifCap.app
-   ```
+```
+xattr -cr /path/to/GifCap.app
+codesign --force --deep --sign - --identifier "io.gifcap" /path/to/GifCap.app
+```
 4. Launch GifCap — it will ask for Screen Recording permission on first run
 5. Open **System Settings → Privacy & Security → Screen & System Audio Recording**, enable **GifCap**, then relaunch
 
